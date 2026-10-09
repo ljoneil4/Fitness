@@ -65,13 +65,29 @@ html, body {
 
 /* ── CHECKPOINT BANNER ── */
 .cp-banner {
-  background: rgba(0,194,168,0.08); border: 1px solid #00C2A8;
-  border-radius: 10px; padding: 10px 13px; margin-bottom: 10px;
-  display: flex; align-items: center; gap: 10px;
+  background: linear-gradient(135deg, rgba(255,209,102,0.12), rgba(0,194,168,0.08));
+  border: 1.5px solid #FFD166;
+  border-radius: 12px; padding: 13px 15px; margin-bottom: 10px;
+  display: flex; align-items: center; gap: 12px;
+  position: relative; overflow: hidden;
 }
-.cp-icon { font-size: 20px; }
-.cp-title { font-size: 13px; color: #00C2A8; font-weight: 700; }
-.cp-sub { font-size: 11px; color: #7A9BB0; }
+.cp-icon { font-size: 24px; }
+.cp-title { font-size: 14px; color: #FFD166; font-weight: 800; letter-spacing: 0.2px; }
+.cp-sub { font-size: 11px; color: #C9D4DE; margin-top: 2px; }
+.cp-tag { font-size: 9px; font-weight: 800; color: #0D1B2A; background: #FFD166; padding: 2px 7px; border-radius: 8px; letter-spacing: 0.4px; text-transform: uppercase; position: absolute; top: 10px; right: 12px; }
+
+/* ── DAY COMPLETE CELEBRATION ── */
+.day-complete-banner {
+  background: linear-gradient(135deg, rgba(0,194,168,0.15), rgba(74,158,255,0.08));
+  border: 1px solid #00C2A8; border-radius: 12px;
+  padding: 14px 15px; margin-bottom: 10px;
+  display: flex; align-items: center; gap: 12px;
+  animation: celebrate-in 0.4s ease;
+}
+@keyframes celebrate-in { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+.day-complete-icon { font-size: 26px; }
+.day-complete-title { font-size: 14px; font-weight: 800; color: #00C2A8; }
+.day-complete-sub { font-size: 11px; color: #7A9BB0; margin-top: 2px; }
 
 /* ── RECOVERY BANNER ── */
 .rec-banner {
@@ -91,6 +107,47 @@ html, body {
 .ov-day { font-size: 13px; font-weight: 600; }
 .ov-focus { font-size: 11px; color: #7A9BB0; }
 .ov-status { font-size: 14px; }
+.ov-day-row.today .ov-day::before { content: '● '; color: #00C2A8; font-size: 10px; }
+
+/* ── DASHBOARD (new overview top section) ── */
+.dash-card {
+  background: linear-gradient(135deg, #1C2E40 0%, #17293b 100%);
+  border-radius: 12px; padding: 16px; margin-bottom: 10px;
+  border: 1px solid #2A4057;
+}
+.dash-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.dash-row:last-child { margin-bottom: 0; }
+.dash-block-progress { flex: 1; }
+.dash-label { font-size: 11px; color: #7A9BB0; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px; }
+.dash-value { font-size: 18px; font-weight: 800; color: #F0F4F8; }
+.block-bar-track { background: #0D1B2A; border-radius: 8px; height: 8px; margin-top: 8px; overflow: hidden; }
+.block-bar-fill { background: linear-gradient(90deg, #00C2A8, #4A9EFF); height: 100%; border-radius: 8px; transition: width 0.4s ease; }
+
+.dash-split { display: flex; gap: 12px; }
+.dash-mini { flex: 1; background: #0D1B2A; border-radius: 10px; padding: 12px; text-align: center; }
+.dash-mini-label { font-size: 10px; color: #7A9BB0; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 6px; }
+.dash-ring-wrap { position: relative; width: 56px; height: 56px; margin: 0 auto 4px; }
+.dash-ring-num { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; color: #F0F4F8; }
+.dash-mini-sub { font-size: 10px; color: #4A6070; }
+.cp-countdown-num { font-size: 24px; font-weight: 900; color: #FFD166; line-height: 1; }
+.cp-countdown-label { font-size: 10px; color: #7A9BB0; margin-top: 4px; }
+
+/* ── DAY ROW REBUILT ── */
+.ov-day-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 0; border-bottom: 1px solid #2A4057; cursor: pointer;
+}
+.ov-day-row:last-child { border-bottom: none; }
+.ov-day-icon {
+  width: 30px; height: 30px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center; font-size: 14px;
+  background: #243B52; border: 1px solid #2A4057;
+}
+.ov-day-icon.complete { background: rgba(0,194,168,0.15); border-color: #00C2A8; color: #00C2A8; }
+.ov-day-info { flex: 1; min-width: 0; }
+.ov-day-name { font-size: 13px; font-weight: 700; }
+.ov-day-focus2 { font-size: 11px; color: #7A9BB0; }
+.ov-day-chevron { color: #4A6070; font-size: 14px; }
 
 /* ── BLOCK ── */
 .block { margin-bottom: 10px; }
@@ -191,11 +248,19 @@ html, body {
 /* ── PROGRESS ── */
 .progress-section { background: #1C2E40; border-radius: 10px; padding: 13px; margin-bottom: 10px; border: 1px solid #2A4057; }
 .progress-title { font-size: 14px; font-weight: 700; margin-bottom: 10px; }
-.prog-mov { margin-bottom: 14px; }
-.prog-mov-name { font-size: 12px; font-weight: 700; color: #FFD166; margin-bottom: 6px; }
-.prog-entry { display: flex; justify-content: space-between; background: #243B52; border-radius: 6px; padding: 5px 9px; font-size: 12px; margin-bottom: 3px; }
-.prog-wk { color: #7A9BB0; }
-.prog-data { color: #F0F4F8; font-weight: 700; }
+.prog-mov { margin-bottom: 18px; }
+.prog-mov:last-child { margin-bottom: 0; }
+.prog-mov-hdr { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+.prog-mov-name { font-size: 12px; font-weight: 700; color: #FFD166; }
+.prog-mov-trend { font-size: 11px; font-weight: 700; }
+.prog-mov-trend.up { color: #00C2A8; }
+.prog-mov-trend.flat { color: #7A9BB0; }
+.prog-bars { display: flex; align-items: flex-end; gap: 4px; height: 54px; margin-bottom: 6px; }
+.prog-bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; min-width: 0; }
+.prog-bar { width: 100%; background: linear-gradient(180deg, #00C2A8, #007A6A); border-radius: 4px 4px 0 0; min-height: 3px; transition: height 0.3s ease; }
+.prog-bar.best { background: linear-gradient(180deg, #FFD166, #d4a83e); }
+.prog-bar-val { font-size: 9px; color: #7A9BB0; font-weight: 700; margin-top: 3px; white-space: nowrap; }
+.prog-bar-wk { font-size: 8px; color: #4A6070; margin-top: 1px; }
 .prog-empty { font-size: 12px; color: #4A6070; padding: 8px 0; }
 
 /* ── VIEW TOGGLE ── */
@@ -221,7 +286,9 @@ html, body {
   position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
   background: #1C2E40; border-top: 1px solid #2A4057;
   padding: 10px 14px; display: flex; align-items: center; justify-content: space-between;
+  transition: transform 0.2s ease;
 }
+.float-timer.hidden { transform: translateY(100%); pointer-events: none; }
 .timer-lbl { font-size: 11px; color: #7A9BB0; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 5px; }
 .timer-presets { display: flex; gap: 5px; }
 .t-btn { background: #243B52; border: 1px solid #2A4057; color: #F0F4F8; font-size: 12px; font-weight: 600; padding: 5px 9px; border-radius: 6px; cursor: pointer; }
@@ -646,6 +713,7 @@ async function renderTabs() {
 // ── RENDER MAIN ───────────────────────────────────────────────────────────────
 async function renderMain() {
   const main=document.getElementById('main');
+  updateTimerVisibility();
   if(!D) { await renderOverview(main); return; }
 
   // Week 0 session remapping
@@ -661,34 +729,149 @@ async function renderMain() {
   VIEW==='progress' ? await renderProgress(main) : await renderSession(main, sess, sessKey);
 }
 
+function updateTimerVisibility() {
+  const timerEl = document.querySelector('.float-timer');
+  if(!timerEl) return;
+  // Show timer only on lift days with actual sets (not run-only days, not week overview, not progress view)
+  const showTimer = D && D!=='tue' && D!=='fri' && VIEW==='session';
+  timerEl.classList.toggle('hidden', !showTimer);
+}
+
+// Checkpoint week indices — used for countdown and progress calculations
+const CHECKPOINT_WEEKS = WEEKS.map((w,i)=>w.phase==='checkpoint'?i:null).filter(i=>i!==null);
+
+function nextCheckpoint(fromWeek) {
+  for(const cw of CHECKPOINT_WEEKS) if(cw >= fromWeek) return cw;
+  return null;
+}
+
+const DAY_ICONS = {'mon':'💪','tue':'🏃','wed':'🏃','thu-a':'⚡','thu-b':'🏃','fri':'🏃'};
+
 async function renderOverview(main) {
   const p=WEEKS[W];
   const isCP=p.phase==='checkpoint';
   const isRec=p.phase==='recovery';
   let html='';
 
-  if(isCP) html+=`<div class="cp-banner"><div class="cp-icon">🎯</div><div><div class="cp-title">Checkpoint Week</div><div class="cp-sub">${p.note}</div></div></div>`;
-  if(isRec && W===0) html+=`<div class="rec-banner"><div class="cp-icon">🦵</div><div><div class="cp-title" style="color:#7A9BB0">Post-Race Recovery</div><div class="cp-sub">${p.note}</div></div></div>`;
+  if(isCP) {
+    html+=`<div class="cp-banner"><div class="cp-tag">Checkpoint</div><div class="cp-icon">🎯</div><div><div class="cp-title">${p.note.split(' — ')[0]}</div><div class="cp-sub">${p.note.split(' — ').slice(1).join(' — ')}</div></div></div>`;
+  }
+  if(isRec && W===0) {
+    html+=`<div class="rec-banner"><div class="cp-icon">🦵</div><div><div class="cp-title" style="color:#7A9BB0">Post-Race Recovery</div><div class="cp-sub">${p.note}</div></div></div>`;
+  }
 
-  html+=`<div class="sess-hdr"><div class="sess-title">${p.label}</div><div class="sess-meta">${p.dates}</div>${p.note&&!isCP&&!isRec?`<div class="sess-goal">${p.note}</div>`:''}<div style="margin-top:10px;font-size:12px;color:#7A9BB0">Select a day above.</div></div>`;
+  // ── DASHBOARD ──
+  const totalWeeks = WEEKS.length;
+  const blockPct = Math.round(((W+1)/totalWeeks)*100);
 
-  // Export button
+  const days=getDays(W);
+  let doneCount=0;
+  for(const d of days) if(await getField(W,d,'logged')) doneCount++;
+  const weekPct = days.length ? Math.round((doneCount/days.length)*100) : 0;
+
+  const nextCP = nextCheckpoint(W);
+  const weeksToGo = nextCP!==null ? nextCP - W : null;
+  const cpText = nextCP===null ? '—' : weeksToGo===0 ? 'This week' : `${weeksToGo}`;
+  const cpSub = nextCP===null ? 'Block complete' : weeksToGo===0 ? WEEKS[nextCP].label.split(' — ')[1]||'' : `week${weeksToGo===1?'':'s'} away`;
+
+  html+=`<div class="dash-card">
+    <div class="dash-row">
+      <div class="dash-block-progress">
+        <div class="dash-label">Winter Block Progress</div>
+        <div class="dash-value">Week ${W+1} of ${totalWeeks}</div>
+        <div class="block-bar-track"><div class="block-bar-fill" style="width:${blockPct}%"></div></div>
+      </div>
+    </div>
+    <div class="dash-split">
+      <div class="dash-mini">
+        <div class="dash-mini-label">This Week</div>
+        <div class="dash-ring-wrap">${buildRing(weekPct)}<div class="dash-ring-num">${doneCount}/${days.length}</div></div>
+        <div class="dash-mini-sub">days logged</div>
+      </div>
+      <div class="dash-mini">
+        <div class="dash-mini-label">Next Checkpoint</div>
+        <div class="cp-countdown-num">${cpText}</div>
+        <div class="cp-countdown-label">${cpSub}</div>
+      </div>
+    </div>
+  </div>`;
+
+  if(p.note && !isCP && !isRec) {
+    html+=`<div class="sess-hdr"><div class="sess-title">${p.label}</div><div class="sess-meta">${p.dates}</div><div class="sess-goal">${p.note}</div></div>`;
+  }
+
   html+=`<button class="export-btn" onclick="runExport()">Export All Data</button><div id="exportOut"></div>`;
 
-  // Week overview
-  const days=getDays(W);
+  // ── DAY LIST ──
   const dNames={'mon':'Monday','tue':'Tuesday','wed':'Wednesday','thu-a':'Thursday (Type A)','thu-b':'Thursday (Type B)','fri':'Friday'};
   const dFocus={'mon':'Pull lift','tue':'Threshold run','wed':'Run + Push lift','thu-a':'Short run + Full lift','thu-b':'Long run + Core only','fri':'Easy long run'};
   const dFocus0={'wed':'Pull lift — no run','thu-a':'Push lift — no run','fri':'Easy jog 30 min'};
+
+  const todayKey = getTodayKey();
 
   html+=`<div class="overview"><div class="overview-title">This Week</div>`;
   for(const d of days) {
     const done=await getField(W,d,'logged');
     const focus=W===0?(dFocus0[d]||dFocus[d]):dFocus[d];
-    html+=`<div class="overview-row" onclick="selectDay('${d}')"><div><div class="ov-day">${dNames[d]}</div><div class="ov-focus">${focus}</div></div><div class="ov-status" style="color:${done?'#00C2A8':'#4A6070'}">${done?'✓':'○'}</div></div>`;
+    const isToday = todayKey===d;
+    html+=`<div class="ov-day-row ${isToday?'today':''}" onclick="selectDay('${d}')">
+      <div class="ov-day-icon ${done?'complete':''}">${done?'✓':DAY_ICONS[d]||'○'}</div>
+      <div class="ov-day-info"><div class="ov-day-name">${dNames[d]}</div><div class="ov-day-focus2">${focus}</div></div>
+      <div class="ov-day-chevron">›</div>
+    </div>`;
   }
   html+=`</div>`;
   main.innerHTML=html;
+}
+
+function buildRing(pct) {
+  const r=24, c=2*Math.PI*r;
+  const offset = c - (pct/100)*c;
+  return `<svg width="56" height="56" style="position:absolute;inset:0;transform:rotate(-90deg)">
+    <circle cx="28" cy="28" r="${r}" fill="none" stroke="#0D1B2A" stroke-width="5"/>
+    <circle cx="28" cy="28" r="${r}" fill="none" stroke="#00C2A8" stroke-width="5" stroke-dasharray="${c}" stroke-dashoffset="${offset}" stroke-linecap="round"/>
+  </svg>`;
+}
+
+async function isSessionComplete(sess) {
+  // Check all lift exercises have all sets done
+  if(sess.blocks) {
+    for(const block of sess.blocks) {
+      if(block.warmup) continue;
+      for(const ex of block.exs) {
+        for(let si=0; si<ex.sets.length; si++) {
+          const done = await getField(W,D,`${ex.name}:${si}:done`);
+          if(!done) return false;
+        }
+      }
+    }
+  }
+  // If this day has a run component, it must be marked done too
+  if((D==='wed'||D==='thu-a'||D==='thu-b') && W>0) {
+    const runDone = await getField(W,D,'rundone');
+    if(!runDone) return false;
+  }
+  // Must have at least one exercise to be "complete" (avoid false positive on empty blocks)
+  const hasAnyExercise = sess.blocks && sess.blocks.some(b=>!b.warmup && b.exs.length>0);
+  return hasAnyExercise;
+}
+
+function getTodayKey() {
+  const today=new Date();
+  const weekStarts=[
+    new Date('2026-10-19'),new Date('2026-10-26'),
+    new Date('2026-11-02'),new Date('2026-11-09'),new Date('2026-11-16'),new Date('2026-11-23'),
+    new Date('2026-11-30'),new Date('2026-12-07'),new Date('2026-12-14'),new Date('2026-12-21'),
+    new Date('2026-12-28'),new Date('2027-01-04'),new Date('2027-01-11'),new Date('2027-01-18'),
+  ];
+  if(W<0||W>=weekStarts.length) return null;
+  const monday=weekStarts[W];
+  const friday=new Date(monday); friday.setDate(friday.getDate()+4); friday.setHours(23,59,59);
+  if(today<monday||today>friday) return null;
+  const dow=today.getDay();
+  const rel=W-2; const thuType=(rel>=0&&rel%2===0)?'thu-a':'thu-b';
+  const dowMap={1:'mon',2:'tue',3:'wed',4:thuType,5:'fri'};
+  return dowMap[dow]||null;
 }
 
 async function renderRunOnly(main, sess) {
@@ -721,8 +904,13 @@ async function renderSession(main, sess, sessKey) {
 
   html+=`<div class="view-toggle"><button class="view-btn ${VIEW==='session'?'active':''}" onclick="switchView('session')">Session</button><button class="view-btn ${VIEW==='progress'?'active':''}" onclick="switchView('progress')">Progress</button></div>`;
 
-  if(isCP) html+=`<div class="cp-banner"><div class="cp-icon">🎯</div><div><div class="cp-title">Checkpoint Week — Push for Max Reps on Marker Movements</div><div class="cp-sub">${p.note}</div></div></div>`;
+  if(isCP) html+=`<div class="cp-banner"><div class="cp-tag">Checkpoint</div><div class="cp-icon">🎯</div><div><div class="cp-title">Push for Max Reps on Marker Movements</div><div class="cp-sub">${p.note}</div></div></div>`;
   if(W===0) html+=`<div class="rec-banner"><div class="cp-icon">🦵</div><div><div class="cp-title" style="color:#7A9BB0">Post-Race Recovery — Upper Body Only</div><div class="cp-sub">No running today. Lift only.</div></div></div>`;
+
+  const dayFullyComplete = await isSessionComplete(sess);
+  if(dayFullyComplete) {
+    html+=`<div class="day-complete-banner"><div class="day-complete-icon">🎉</div><div><div class="day-complete-title">Session Complete</div><div class="day-complete-sub">Every set logged. Nice work.</div></div></div>`;
+  }
 
   html+=`<div class="sess-hdr"><div class="sess-title">${sess.title}</div><div class="sess-meta">${sess.time}</div><div class="sess-goal">${sess.goal}</div></div>`;
 
@@ -867,7 +1055,6 @@ async function renderProgress(main) {
   html+=`<div class="progress-section"><div class="progress-title">Marker Movement Progress</div>`;
 
   for(const name of markers) {
-    html+=`<div class="prog-mov"><div class="prog-mov-name">⭑ ${name}</div>`;
     const entries=[];
     for(let w=0;w<WEEKS.length;w++) {
       const days=getDays(w);
@@ -883,15 +1070,41 @@ async function renderProgress(main) {
         const reps=[];
         for(let si=0;si<4;si++) {
           const r=await getField(w,d,`${name}:${si}:r`);
-          if(r) reps.push(r);
+          if(r && !isNaN(parseInt(r))) reps.push(parseInt(r));
         }
-        if(reps.length) entries.push({week:WEEKS[w].label,reps:reps.join(' / ')});
+        if(reps.length) entries.push({week:w, weekLabel:WEEKS[w].label, best:Math.max(...reps)});
       }
     }
+
+    html+=`<div class="prog-mov">`;
     if(entries.length===0) {
-      html+=`<div class="prog-empty">No data yet.</div>`;
+      html+=`<div class="prog-mov-hdr"><div class="prog-mov-name">⭑ ${name}</div></div><div class="prog-empty">No data yet.</div>`;
     } else {
-      html+=entries.map(e=>`<div class="prog-entry"><span class="prog-wk">${e.week}</span><span class="prog-data">${e.reps} reps</span></div>`).join('');
+      // Trend: compare most recent to first
+      const first=entries[0].best, latest=entries[entries.length-1].best;
+      const delta=latest-first;
+      const trendLabel = entries.length<2 ? '' : delta>0 ? `↑ +${delta}` : delta<0 ? `↓ ${delta}` : '— flat';
+      const trendClass = delta>0 ? 'up' : 'flat';
+
+      html+=`<div class="prog-mov-hdr"><div class="prog-mov-name">⭑ ${name}</div>${trendLabel?`<div class="prog-mov-trend ${trendClass}">${trendLabel}</div>`:''}</div>`;
+
+      // Bar chart — last 8 data points max, so it stays readable
+      const shown = entries.slice(-8);
+      const maxVal = Math.max(...shown.map(e=>e.best), 1);
+      const bestVal = Math.max(...shown.map(e=>e.best));
+
+      html+=`<div class="prog-bars">`;
+      for(const e of shown) {
+        const heightPct = Math.max((e.best/maxVal)*100, 6);
+        const isBest = e.best===bestVal;
+        const shortLabel = e.weekLabel.replace('November','Nov').replace('December','Dec').replace('January','Jan').replace(' — Week ',' W').replace('Post-Race ','PR');
+        html+=`<div class="prog-bar-col">
+          <div class="prog-bar-val">${e.best}</div>
+          <div class="prog-bar ${isBest?'best':''}" style="height:${heightPct}%"></div>
+          <div class="prog-bar-wk">${shortLabel}</div>
+        </div>`;
+      }
+      html+=`</div>`;
     }
     html+=`</div>`;
   }
@@ -983,7 +1196,7 @@ async function autoSaveSet(exName, totalSets, rest, si) {
     const rVal=rEl?rEl.value.trim():'';
     if(wVal) { await setField(W,D,`${exName}:${si}:w`,wVal); await setGlobal(`work:${exName}`,wVal); }
     if(rVal) { await setField(W,D,`${exName}:${si}:r`,rVal); await setGlobal(`carried:${exName}:${si}`,rVal); }
-    if(wVal||rVal) { await setField(W,D,'_wasReset',''); showSaved('✓ Updated'); }
+    if(wVal||rVal) showSaved('✓ Updated');
     return;
   }
   const saved = await completeSet(exName, totalSets, rest, si);
